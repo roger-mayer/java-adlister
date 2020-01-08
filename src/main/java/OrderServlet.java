@@ -13,7 +13,7 @@ public class OrderServlet extends HttpServlet {
                 "  Product Name:<br>\n" +
                 "  <input type=\"text\" name=\"productname\"><br>\n" +
                 "  Quantity:<br>\n" +
-                "  <input type=\"text\" name=\"quantity\"><br><br>\n" +
+                "  <input type=\"int\" name=\"quantity\"><br><br>\n" +
                 "  <input type=\"submit\" value=\"Submit\">\n" +
                 "</form>");
 

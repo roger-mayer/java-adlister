@@ -9,7 +9,8 @@ import java.io.PrintWriter;
 public class OrderSummaryServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException{
         String product = req.getParameter("productname");
-        String quantity = req.getParameter("quantity");
+        String quantityString = req.getParameter("quantity");
+        int quantity = Integer.parseInt(quantityString);
         PrintWriter pw = res.getWriter();
         pw.println("<h1>Product:  "+ product +
                     "<br><br>" +
