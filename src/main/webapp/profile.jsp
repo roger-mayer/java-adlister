@@ -8,14 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Profile</title>
-    <style type="text/css">
-        <%@include file="./resources/static/css/general.css" %>
-    </style>
+    <jsp:include page="/partials/head.jsp" >
+        <jsp:param name="title" value="Your Profile" />
+    </jsp:include>
 </head>
 <body>
-<%@ include file="navbar.jsp" %>
-<%@ include file="partials/banner.jsp" %>
+<%@ include file="partials/navbar.jsp" %>
+<div class="container">
 <h1>Hello ${param.username}!</h1>
+</div>
+
 </body>
 </html>
+
