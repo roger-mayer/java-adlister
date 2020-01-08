@@ -16,10 +16,10 @@
 </head>
 <body>
 <%--<%@ include file="partials/banner.jsp" %>--%>
-<%--<%@ include file="partials/side_nav.jsp" %>--%>
+<%--<%@ include file="partials/navbar.jsp" %>--%>
 <c:choose>
     <c:when test="${param.username == 'admin' && param.password == 'password'}">
-        <c:redirect url="./profile.jsp">
+        <c:redirect url="profile.jsp">
             <c:param name="username" value="${param.username}"></c:param>
             <c:param name="password" value="${param.password}"></c:param>
         </c:redirect>
