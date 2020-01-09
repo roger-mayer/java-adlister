@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsImplement implements ProductInterface{
-
+// data model
     public List<ProductBean> productBeanList = new ArrayList<>();
 
     @Override
