@@ -1,5 +1,8 @@
+//If object exists, return that object instead of creating new object
+
 public class DaoFactory {
     private static Ads adsDao;
+    private static Contacts contactsDao;
 
     public static Ads getAdsDao() {
         if (adsDao == null) {
@@ -7,4 +10,14 @@ public class DaoFactory {
         }
         return adsDao;
     }
+
+    public static Contacts getContactsDao() {
+        if (contactsDao == null) {
+            contactsDao = new ContactListDao();
+        }
+        return contactsDao;
+    }
 }
+
+
+

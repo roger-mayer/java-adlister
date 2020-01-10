@@ -1,3 +1,5 @@
+//BEAN- CONSTRUCTORS TO REPRESENT DATA IN APPLICATION
+
 public class Ad {
     private long id;
     private long userId;

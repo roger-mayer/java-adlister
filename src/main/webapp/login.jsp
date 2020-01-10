@@ -20,6 +20,7 @@
     <div class="container">
         <h1>Please Log In</h1>
         <form action="/login" method="POST">
+            <%-- action="/login" sends to url that servlet is listening for--%>
             <div class="form-group">
                 <label for="username">Username</label>
                 <input id="username" name="username" class="form-control" type="text">

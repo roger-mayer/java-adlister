@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class ListAdsDao implements Ads {
         }
         return ads;
     }
+
+    //create data
 
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();

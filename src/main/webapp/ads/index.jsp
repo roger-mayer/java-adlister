@@ -1,3 +1,8 @@
+<%--
+VIEW- INDEX PAGE FOR ALL ADDS. Receivces info from AdsIndexServlet
+--%>
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -11,7 +16,8 @@
     <div class="container">
         <h1>Welcome to the Adlister!</h1>
         <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6" ><h2>${ad.title}</h2>
+        <div class="col-md-6" >
+            <h2>${ad.title}</h2>
             <h3>${ad.description}</h3>
         </div>
     </c:forEach>
