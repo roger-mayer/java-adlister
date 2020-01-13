@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/ads")
-public class AdsIndexServlet extends HttpServlet {
+public class AdsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         Ads allAds = DaoFactory.getAdsDao(); //tool to access objects from DAO factory
         List<Ad> ads = allAds.all(); // sets adds to ads interface

@@ -17,6 +17,8 @@ public class LoginServlet extends HttpServlet {
         if (username.equals("admin") && password.equals("password")) {
             req.setAttribute("username", username);
             req.getRequestDispatcher("/profile").forward(req, res);
+        //            set a key named "user" in the session
+
         } else {
             res.sendRedirect("/login");
         }

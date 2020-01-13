@@ -1,5 +1,5 @@
 <%--
-VIEW- INDEX PAGE FOR ALL ADDS. Receivces info from AdsIndexServlet
+VIEW- INDEX PAGE FOR ALL ADDS. Receivces info from AdsServlet
 --%>
 
 

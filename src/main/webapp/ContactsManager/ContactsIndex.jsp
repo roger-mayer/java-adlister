@@ -21,7 +21,7 @@
         <div class="col-md-6" >
             <h2>${contact.firstName} ${contact.lastName}</h2>
             <h3>${contact.phoneNumber}</h3>
-            <form id="${contact.id}" action="/UpdateContact" method="post">
+            <form id="${contact.id}" action="ContactsManager/UpdateContact.jsp" method="post">
                 <button>Edit Contact</button>
             </form>
 
@@ -37,9 +37,9 @@
 <form action="ContactsManager/AddContact.jsp">
     <button>Add Contact</button>
 </form>
-<form action="ContactsManager/UpdateContact.jsp">
-    <button>Update Contact</button>
-</form>
+<%--<form action="ContactsManager/UpdateContact.jsp">--%>
+<%--    <button>Update Contact</button>--%>
+<%--</form>--%>
 <form action="DeleteContactServlet">
     <button>Delete Contact</button>
 </form>
