@@ -19,6 +19,8 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password"); //get info from login jsp
         boolean validAttempt = username.equals("admin") && password.equals("password");
 
+
+        //when a user successfully logs in, set a key named "user" in the session
         if (validAttempt) {
             request.getSession().setAttribute("user", username);
             response.sendRedirect("/profile");

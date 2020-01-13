@@ -13,6 +13,8 @@ public class LogoutServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        //executes if "/logout" is typed directly into url
+        request.getSession().invalidate(); //removes all session variables
+        response.sendRedirect("/login"); //redirects to login
     }
 }
