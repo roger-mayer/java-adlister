@@ -1,3 +1,5 @@
+package models;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,5 +26,6 @@ public class MySQLAdsDao implements Ads {
             config.getPassword()
     );
 // ...
+
 }
 //    Your methods should retrieve ads from the database and insert new ads into the database
