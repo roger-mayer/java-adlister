@@ -1,4 +1,7 @@
-public class Ad {
+package models;
+import java.io.Serializable;
+
+public class Ad implements Serializable{
     private long id;
     private long userId;
     private String title;
@@ -48,4 +51,15 @@ public class Ad {
     public void setDescription(String description) {
         this.description = description;
     }
+    @Override
+    public String toString() {
+        return "Ad{" +
+                "id=" + id +
+                ", userid='" + userId + '\'' +
+                ", title='" + title + '\'' +
+                ", description=" + description +
+                '}';
+    }
 }
+
+
