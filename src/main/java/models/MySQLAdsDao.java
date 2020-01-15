@@ -8,22 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 //  Create a class named MySQLAdsDao that implements the Ads interface
-public class MySQLAdsDao implements Ads {
 //  This class should have a private instance property
 //  named connection of type Connection
 //  that is initialized in the constructor.
-    private Connection connection;
-
 //  Define your constructor so that it
 //  accepts an instance of your Config class
 //  so that it can obtain the database credentials.
+
+public class MySQLAdsDao implements Ads {
+    private Connection connection;
     public MySQLAdsDao(Config config) {
         try {
-
+//            Config config = new Config();
             DriverManager.registerDriver(new Driver());
             this.connection = DriverManager.getConnection(
                     config.getUrl(),
-                    config.getUsername(),
+                    config.getUser(),
                     config.getPassword()
             );
         } catch (SQLException e) {
@@ -37,11 +37,11 @@ public class MySQLAdsDao implements Ads {
         List<Ad> output = new ArrayList<>(); //create new list
         String query = "Select * FROM ads";
         try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            while (rs.next()) {
-                output.add(
-                        new Ad(
+            Statement statement = connection.createStatement(); //create statement object
+            ResultSet rs = statement.executeQuery(query); //save result set from executed query
+            while (rs.next()) {  //iterate over result set
+                output.add(  //add object to list
+                        new Ad( //create new ad object
                                 rs.getLong("id"),
                                 rs.getLong("user_id"),
                                 rs.getString("title"),
@@ -74,14 +74,15 @@ public class MySQLAdsDao implements Ads {
     public static void main(String[] args) throws SQLException {
         Config config = new Config();
         Ads adsDao = new models.MySQLAdsDao(config);
-        //set up test add
+//        long lastInsertedId = adsDao.insert(Ads ad);
+        //test insert add
         Ad testAd = new Ad(
                 1,
                 "test title1",
                 "test description1"
 
         );
-
+        //testing all method
         adsDao.insert(testAd);
         List<Ad> ads = adsDao.all();
         for (Ad ad : ads) {
