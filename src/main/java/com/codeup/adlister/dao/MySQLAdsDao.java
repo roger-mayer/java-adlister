@@ -39,6 +39,45 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    /**
+     * Method to get a list of ads filtered by the title
+     * @param searchString  String to use for filtering
+     * @return              A filtered list of ads
+     */
+
+    @Override
+    public List<Ad> getFilteredList(String searchString) {
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ads WHERE title LIKE '%" + searchString + "%' ");
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving filtered ads list.", e);
+        }
+    }
+
+    /**
+     * Method to get a list of ads filtered by the title
+     * @param searchString  String to use for filtering
+     * @return              A filtered list of ads
+     */
+    @Override
+    public List<Ad> getPreparedList(String searchString) {
+        // notice that there are no quotes on the question mark
+        String sql = "SELECT * FROM ads WHERE title LIKE ? OR description LIKE ?";
+        String searchTermWithWildcards = "%" + searchString + "%";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, searchTermWithWildcards);
+            stmt.setString(2, searchTermWithWildcards);
+
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving filtered ads list.", e);
+        }
+    }
     @Override
     public Long insert(Ad ad) {
         try {

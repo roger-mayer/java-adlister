@@ -7,4 +7,9 @@ import java.util.List;
 public interface Users {
     User findByUsername(String username);
     Long insert(User user);
+    List<User> all();
+    List<User> getFilteredList(String searchString);
+    List<User> getPreparedList(String searchString);
+
+
 }

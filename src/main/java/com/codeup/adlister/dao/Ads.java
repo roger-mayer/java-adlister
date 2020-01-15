@@ -9,4 +9,10 @@ public interface Ads {
     List<Ad> all();
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
+    //get filtered list of ads
+    List<Ad> getFilteredList(String searchString);
+    //get list filtered by title
+    List<Ad> getPreparedList(String searchString);
+
+
 }
