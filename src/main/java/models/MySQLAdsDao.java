@@ -7,12 +7,19 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//  Create a class named MySQLAdsDao that implements the Ads interface
 public class MySQLAdsDao implements Ads {
+//  This class should have a private instance property
+//  named connection of type Connection
+//  that is initialized in the constructor.
     private Connection connection;
 
-    public MySQLAdsDao() {
+//  Define your constructor so that it
+//  accepts an instance of your Config class
+//  so that it can obtain the database credentials.
+    public MySQLAdsDao(Config config) {
         try {
-            Config config = new Config();
+
             DriverManager.registerDriver(new Driver());
             this.connection = DriverManager.getConnection(
                     config.getUrl(),
@@ -24,6 +31,7 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+//    method should retrieve ads from the database
     @Override
     public List<Ad> all() {
         List<Ad> output = new ArrayList<>(); //create new list
@@ -48,6 +56,7 @@ public class MySQLAdsDao implements Ads {
         return output;
     }
 
+//  method to insert new ads into the database
     @Override
     public Long insert(Ad newAd) throws SQLException {
         String insertQuery = "INSERT INTO ads (user_id, title, description) VALUES (" + newAd.getUserId() + ",'" + newAd.getTitle() + "','" + newAd.getDescription() + "')";
@@ -63,7 +72,8 @@ public class MySQLAdsDao implements Ads {
 
 
     public static void main(String[] args) throws SQLException {
-        Ads adsDao = new models.MySQLAdsDao();
+        Config config = new Config();
+        Ads adsDao = new models.MySQLAdsDao(config);
         //set up test add
         Ad testAd = new Ad(
                 1,
