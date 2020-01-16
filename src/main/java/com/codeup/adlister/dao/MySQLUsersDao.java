@@ -25,10 +25,14 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public User findByUsername(String username) {
+        //structuring search query that matches username based on search input
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
         try {
+        // using prepared statement to protect against SQL injection
             PreparedStatement stmt = connection.prepareStatement(query);
+        //replaces query parameter with a string that is passed through the method (user search method)
             stmt.setString(1, username);
+        //returns result set based on extractUser method
             return extractUser(stmt.executeQuery());
         } catch (SQLException e) {
             throw new RuntimeException("Error finding a user by username", e);
