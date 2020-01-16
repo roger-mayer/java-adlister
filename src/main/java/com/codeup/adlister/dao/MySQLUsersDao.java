@@ -33,25 +33,63 @@ public class MySQLUsersDao implements Users {
 
     @Override
     public User findByUsername(String username) {
+        User registeredUser = null;
+        String sql = "SELECT * FROM users WHERE username LIKE ?";
         try {
-            String sql = "SELECT * FROM users WHERE username LIKE ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            rs.next();
-            User result = new User(
-                    rs.getLong("id"),
-                    rs.getString("username"),
-                    rs.getString("email"),
-                    rs.getString("password")
-            );
-            return result;
+            if (rs.next()) {
+                registeredUser = new User(
+                        rs.getLong("id"),
+                        rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                );
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Error finding User");
         }
+
+        return registeredUser;
+    }
+    @Override
+    public Long insert(User user) {
+        String query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            return rs.getLong(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0L;
+    }
+    private String createInsertQuery(User user){
+        return "INSERT INTO users(username, email, password) VALUES "
+                + "('" + user.getUsername() + "',"
+                + "('" + user.getEmail() + "',"
+                + "('" + user.getPassword() + "',)";
     }
 
+
+    @Override
+    public List<User> all() {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        Users userDao = new MySQLUsersDao(new Config());
+//        System.out.println(userDao.findByUsername("asdf"));
+        User user = new User("t123", "t@email.com", "strongpassword");
+        long lastInsertedId = userDao.insert(user);
+        System.out.println(lastInsertedId);
+    }
 
 
 //    @Override
@@ -75,15 +113,8 @@ public class MySQLUsersDao implements Users {
 //    }
 
 
-    @Override
-    public List<User> all() {
-        return null;
-    }
 
-    @Override
-    public Long insert(User user) {
-        return null;
-    }
+
 
     @Override
     public List<User> getFilteredList(String searchString) {

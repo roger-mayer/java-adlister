@@ -1,6 +1,7 @@
 package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
+import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,29 +19,33 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // TODO: ensure the submitted information is valid
 
         String username = request.getParameter("newUsername");
         String email = request.getParameter("newEmail");
         String password = request.getParameter("newPassword");
 
-        if ((password.length() < 8)
-            && password.matches("(?=.*[a-z]).*")
-            && password.matches("(?=.*[A-Z]).*")
-            && password.matches("(?=.*[1-9]).*")
-            && password.matches("(?=.*[~!@#$%^&*()_><=+?.,/]).*")) {
-            String validPassword = password;
+        // TODO: ensure the submitted information is valid
+        if (DaoFactory.getUsersDao().findByUsername(username) == null){
+
+            if (username == null || password == null || !email.contains("@")) {
+            response.sendRedirect("/register");
+        // TODO: create a new user based off of the submitted information
+        // TODO: if a user was successfully created, send them to their profile
+            } else {
+                User newUser = new User(username, email, password);
+                DaoFactory.getUsersDao().insert(newUser);
+                request.getSession().setAttribute("user", newUser);
+                response.sendRedirect("/profile");
+            }
         } else {
             response.sendRedirect("/register");
-        }
-
-        if (DaoFactory.getUsersDao().findByUsername(username) != null) {
+            }
 
         }
 
 
-        // TODO: create a new user based off of the submitted information
-        // User user = new user();
-        // TODO: if a user was successfully created, send them to their profile
+
+
+
     }
-}
+
