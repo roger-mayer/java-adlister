@@ -36,15 +36,16 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect("/register");
         // TODO: create a new user based off of the submitted information
         // TODO: if a user was successfully created, send them to their profile
-            } else {
-                User newUser = new User(username, email, password);
-                DaoFactory.getUsersDao().insert(newUser);
-                request.getSession().setAttribute("user", newUser);
-                response.sendRedirect("/profile");
-            }
         } else {
+            User newUser = new User(username, email, hash);
+            DaoFactory.getUsersDao().insert(newUser);
+            request.getSession().setAttribute("isLoggedIn", true);
+            request.getSession().setAttribute("user", newUser);
+            response.sendRedirect("/profile");
+        }
+            } else {
             response.sendRedirect("/register");
-            }
+        }
 
         }
 

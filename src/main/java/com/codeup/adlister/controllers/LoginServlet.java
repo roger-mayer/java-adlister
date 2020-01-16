@@ -32,27 +32,27 @@ public class LoginServlet extends HttpServlet {
         request.getSession().setAttribute("isLoggedIn", validAttempt);
 
         if (DaoFactory.getUsersDao().findByUsername(username) != null) {
-            if(username.equals(DaoFactory.getUsersDao().findByUsername(username).getUsername()) && passwordMatch){
+            if (username.equals(DaoFactory.getUsersDao().findByUsername(username).getUsername()) && passwordMatch) {
                 validAttempt = true;
-            // TODO: store the logged in user object in the session, instead of just the username
+                // TODO: store the logged in user object in the session, instead of just the username
 //            request.getSession().setAttribute("user", username);
 //            response.sendRedirect("/profile");
+            } else {
+                response.sendRedirect("/login");
+                return;
+            }
+        }
+
+        if (validAttempt) {
+            request.getSession().setAttribute("user", DaoFactory.getUsersDao().findByUsername(username));
+            request.getSession().setAttribute("isLoggedIn", validAttempt);
+            response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");
-            return;
         }
     }
 
-    if(validAttempt){
-        request.getSession().setAttribute("user", DaoFactory.getUsersDao().findByUsername(username));
-        request.getSession().setAttribute("isLoggedIn", validAttempt);
-        response.sendRedirect("/profile");
-    } else {
-        response.sendRedirect("/login");
-
-    }
-
-    }
+}
 
 
 
