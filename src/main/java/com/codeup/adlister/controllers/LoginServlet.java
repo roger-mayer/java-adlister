@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         // TODO: check the submitted password against what you have in your database
         boolean validAttempt = false;
 
-        if (username.getUsersDao().findByUsername(username) != null) {
+        if (DaoFactory.getUsersDao().findByUsername(username) != null) {
             if(username.equals(DaoFactory.getUsersDao().findByUsername(username).getUsername()) || password.equals(DaoFactory.getUsersDao().findByUsername(username).getPassword()))
             // TODO: store the logged in user object in the session, instead of just the username
             request.getSession().setAttribute("user", username);
